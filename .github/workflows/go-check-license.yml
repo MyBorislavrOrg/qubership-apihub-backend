@@ -41,10 +41,10 @@ jobs:
 
       - name: Check License
         run: |
-          #go get ${MODULE}/... || true
-          #go mod vendor -e | grep "go get" | bash
-          #go mod vendor -e | grep "go get" | bash
-          go build ./...
+          go get ${MODULE}/... || true
+          go mod vendor -e | grep "go get" | bash
+          go mod vendor -e | grep "go get" | bash
+          #go build ./...
           #go get -u ./...
           which wwhrd || go install github.com/frapposelli/wwhrd@latest
           wwhrd check -f ${{ github.workspace }}/.wwhrd.yml
