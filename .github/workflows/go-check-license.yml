@@ -47,5 +47,5 @@ jobs:
           #go build ./...
           #go get -u ./...
           which wwhrd || go install github.com/frapposelli/wwhrd@latest
-          wwhrd check -f ${{ github.workspace }}/.wwhrd.yml
+          wwhrd check -f ${{ github.workspace }}/.wwhrd.yml >> $GITHUB_STEP_SUMMARY
         working-directory: "${{ github.workspace }}/${{ env.GO_MOD_DIR }}"
