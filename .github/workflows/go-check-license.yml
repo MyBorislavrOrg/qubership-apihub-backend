@@ -43,7 +43,7 @@ jobs:
         run: |
           go get ${MODULE}/... || true
           go mod vendor -e | grep "go get" | bash
-          go mod vendor || true
+          go mod vendor -e | grep "go get" | bash
           which wwhrd || go install github.com/frapposelli/wwhrd@latest
           wwhrd check -f ${{ github.workspace }}/.wwhrd.yml
         working-directory: "${{ github.workspace }}/${{ env.GO_MOD_DIR }}"
