@@ -42,21 +42,20 @@ jobs:
       - name: Get modules
         continue-on-error: true
         run: |
-          echo "::debug::go get ${MODULE}/..."
+          echo "[DEBUG] go get ${MODULE}/..."
           go get ${MODULE}/... || true
-          echo "::debug::1. go mod vendor -e | grep \"go get\" | bash"
+          echo "[DEBUG] 1. go mod vendor -e | grep \"go get\" | bash"
           go mod vendor -e | grep "go get" | bash
-          echo "::debug::2. go mod vendor -e | grep \"go get\" | bash"
+          echo "[DEBUG] 2. go mod vendor -e | grep \"go get\" | bash"
           go mod vendor -e | grep "go get" | bash
-          echo "::debug::3. go mod vendor -e | grep \"go get\" | bash"
+          echo "[DEBUG] 3. go mod vendor -e | grep \"go get\" | bash"
           go mod vendor -e | grep "go get" | bash
-          which wwhrd || go install github.com/frapposelli/wwhrd@latest
-          wwhrd check -f ${{ github.workspace }}/.wwhrd.yml >> $GITHUB_STEP_SUMMARY
+
         working-directory: "${{ github.workspace }}/${{ env.GO_MOD_DIR }}"
 
       - name: Check License
         continue-on-error: true
         run: |
           which wwhrd || go install github.com/frapposelli/wwhrd@latest
-          wwhrd check -f ${{ github.workspace }}/.wwhrd.yml >> $GITHUB_STEP_SUMMARY
+          wwhrd check -f ${{ github.workspace }}/.wwhrd.yml
         working-directory: "${{ github.workspace }}/${{ env.GO_MOD_DIR }}"
