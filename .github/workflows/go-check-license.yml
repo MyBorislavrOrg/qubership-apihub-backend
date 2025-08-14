@@ -34,17 +34,18 @@ jobs:
         id: go
         uses: actions/setup-go@v5
         with:
-          go-version: '>=1.24.0'
+          #go-version: '>=1.24.0'
           cache: true
           cache-dependency-path: "**/*.sum"
-          #go-version-file: "${{ env.GO_MOD_FILE }}"
+          go-version-file: "${{ env.GO_MOD_FILE }}"
 
       - name: Check License
         run: |
           #go get ${MODULE}/... || true
           #go mod vendor -e | grep "go get" | bash
           #go mod vendor -e | grep "go get" | bash
-          go get -u ./...
+          go build ./...
+          #go get -u ./...
           which wwhrd || go install github.com/frapposelli/wwhrd@latest
           wwhrd check -f ${{ github.workspace }}/.wwhrd.yml
         working-directory: "${{ github.workspace }}/${{ env.GO_MOD_DIR }}"
